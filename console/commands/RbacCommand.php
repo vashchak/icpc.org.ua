@@ -40,6 +40,7 @@ class RbacCommand extends \console\ext\ConsoleCommand
          */
         $this->_operationsDocument();
         $this->_operationsNews();
+        $this->_operationsQuani();
 
         /**
          * Guest role
@@ -51,6 +52,7 @@ class RbacCommand extends \console\ext\ConsoleCommand
         $guestOperationList = array(
             'documentRead',
             'newsRead',
+            'questionRead'
         );
         $this->_assignOperations($guest, $guestOperationList);
 
@@ -103,6 +105,9 @@ class RbacCommand extends \console\ext\ConsoleCommand
             'documentUpdate',
             'newsCreate',
             'newsUpdate',
+            'questionCreate',
+            'questionUpdate',
+            'answerCreate'
         );
         $this->_assignOperations($coordinator, $coordinatorOperationList);
 
@@ -149,7 +154,27 @@ class RbacCommand extends \console\ext\ConsoleCommand
     }
 
     /**
+     * Quani operations
+     *
+     * @return void
+     */
+    protected function _operationsQuani()
+    {
+        $bizRuleQuestionRead    = 'return \yii::app()->rbac->bizRuleQuestionRead($params);';
+        $bizRuleQuestionUpdate  = 'return \yii::app()->rbac->bizRuleQuestionUpdate($params);';
+        $bizRuleQuestionCreate  = 'return \yii::app()->rbac->bizRuleQuestionCreate($params);';
+        $bizRuleAnswerCreate    = 'return \yii::app()->rbac->bizRuleAnswerCreate($params);';
+
+        $this->auth->createOperation('questionRead', 'Read question', $bizRuleQuestionRead);
+        $this->auth->createOperation('questionUpdate', 'Update question', $bizRuleQuestionUpdate);
+        $this->auth->createOperation('questionCreate', 'Create question', $bizRuleQuestionCreate);
+        $this->auth->createOperation('answerCreate', 'Create answer', $bizRuleAnswerCreate);
+    }
+
+    /**
      * Document operations
+     *
+     * @return void
      */
     protected function _operationsDocument()
     {
@@ -163,6 +188,8 @@ class RbacCommand extends \console\ext\ConsoleCommand
 
     /**
      * News operations
+     *
+     * @return void
      */
     protected function _operationsNews()
     {
@@ -176,6 +203,8 @@ class RbacCommand extends \console\ext\ConsoleCommand
 
     /**
      * Create first admin user
+     *
+     * @return void
      */
     public function actionInitAdmin()
     {
@@ -205,7 +234,5 @@ class RbacCommand extends \console\ext\ConsoleCommand
             echo "Email: $email\n";
             echo "Password: $password\n";
         }
-
     }
-
 }

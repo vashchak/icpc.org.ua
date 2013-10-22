@@ -309,4 +309,8 @@ class User extends \common\ext\MongoDb\Document
         return $isValid;
     }
 
+    public function fio()
+    {
+        return $this->firstName . ' ' . $this->lastName;
+    }
 }

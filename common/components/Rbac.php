@@ -106,4 +106,47 @@ class Rbac extends \CApplicationComponent
         return $this->checkAccess(User::ROLE_COORDINATOR);
     }
 
+    /**
+     * Question read rule
+     *
+     * @param array $params
+     * @return boolean
+     */
+    public function bizRuleQuestionRead(array $params)
+    {
+        return true;
+    }
+
+    /**
+     * Question update rule
+     *
+     * @param array $params
+     * @return boolean
+     */
+    public function bizRuleQuestionUpdate(array $params)
+    {
+        return !\yii::app()->user->isGuest;
+    }
+
+    /**
+     * Question create rule
+     *
+     * @param array $params
+     * @return boolean
+     */
+    public function bizRuleQuestionCreate(array $params)
+    {
+        return !\yii::app()->user->isGuest;
+    }
+
+    /**
+     * Answer update rule
+     *
+     * @param array $params
+     * @return boolean
+     */
+    public function bizRuleAnswerCreate(array $params)
+    {
+        return !\yii::app()->user->isGuest;
+    }
 }

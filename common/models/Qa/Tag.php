@@ -92,12 +92,12 @@ class Tag extends \common\ext\MongoDb\Document
      */
     protected function beforeValidate()
     {
-        if (!parent::beforeValidate()) return false;
+        if (!parent::beforeValidate()) {
+            return false;
+        }
 
-        // Convert to string
         $this->name = trim(mb_strtolower($this->name));
 
-        // Set created date
         if ($this->dateCreated == null) {
             $this->dateCreated = time();
         }

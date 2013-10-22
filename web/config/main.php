@@ -64,6 +64,16 @@ $config = array(
                     ),
                     'depends' => array('jquery'),
                 ),
+                'select2' => array(
+                    'js' => array(
+                        'lib/select2/select2.js',
+                        'lib/select2/select2_locale_ru.js',
+                    ),
+                    'css' => array(
+                        'lib/select2/select2.css',
+                    ),
+                    'depends' => array('jquery'),
+                ),
             ),
         ),
 

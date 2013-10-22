@@ -83,6 +83,10 @@
                                 'href'      => '/results',
                                 'caption'   => \yii::t('app', 'Results'),
                             ),
+                            'quani' => array(
+                                'href'      => '/quani',
+                                'caption'   => \yii::t('app', 'Quani'),
+                            ),
                             'staff' => array(
                                 'href'      => $this->createUrl('/staff'),
                                 'caption'   => \yii::t('app', 'Staff'),

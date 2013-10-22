@@ -98,6 +98,11 @@ class Controller extends \web\ext\Controller
                 'roles'         => array(User::ROLE_ADMIN),
             ),
             array(
+                'allow',
+                'controllers'   => array('staff/quani'),
+                'roles'         => array(User::ROLE_COORDINATOR),
+            ),
+            array(
                 'deny',
             ),
         ));

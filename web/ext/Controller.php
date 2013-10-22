@@ -79,6 +79,7 @@ class Controller extends \CController
     {
         header('Content-type: application/json');
         echo \CJSON::encode($data);
+        exit;
     }
 
     /**
@@ -171,4 +172,26 @@ class Controller extends \CController
         throw new \CHttpException($status, $message, $code);
     }
 
+    protected function applyChanges(\EMongoDocument $entity, array $params, $callback = null)
+    {
+        $_['status'] = 'entered';
+        $_['errors'] = array();
+        $entity->setAttributes($params, false);
+        try {
+            if ($entity->save()) {
+                $_['status'] = 'success';
+                $_['id'] = (string)$entity->_id;
+                if ($callback) {
+                    $callback();
+                }
+            } else {
+                $_['status'] = 'error';
+                $_['errors'] = $entity->getErrors();
+            }
+        } catch (\Exception $e) {
+            $_['status'] = 'error';
+            $_['errors']['common'] = $e->getMessage();
+        }
+        $this->renderJson($_);
+    }
 }
