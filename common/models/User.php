@@ -452,4 +452,8 @@ class User extends \common\ext\MongoDb\Document
         return (crypt($password, $this->hash) === $this->hash);
     }
 
+    public function fio()
+    {
+        return $this->firstName . ' ' . $this->lastName;
+    }
 }

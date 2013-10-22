@@ -83,9 +83,7 @@ $config = array(
                         'lib/select2/select2.css',
                         'lib/select2/select2-bootstrap.css'
                     ),
-                    'depends' => array(
-                        'jquery',
-                    )
+                    'depends' => array('jquery'),
                 )
 
             ),

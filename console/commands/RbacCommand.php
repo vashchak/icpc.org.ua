@@ -43,14 +43,17 @@ class RbacCommand extends \console\ext\ConsoleCommand
         $this->_operationsNews();
         $this->_operationsResult();
         $this->_operationsTeam();
+        $this->_operationsQa();
 
         /**
          * Guest role
          */
         $this->_createRole(User::ROLE_GUEST, array(
+            Rbac::OP_ANSWER_READ,
             Rbac::OP_DOCUMENT_READ,
             Rbac::OP_NEWS_READ,
             Rbac::OP_TEAM_READ,
+            Rbac::OP_QUESTION_READ,
         ));
 
         /**
@@ -65,6 +68,8 @@ class RbacCommand extends \console\ext\ConsoleCommand
          */
         $this->_createRole(User::ROLE_STUDENT, array(
             User::ROLE_USER,
+            Rbac::OP_QUESTION_CREATE,
+            Rbac::OP_QUESTION_UPDATE,
         ));
 
         /**
@@ -81,6 +86,8 @@ class RbacCommand extends \console\ext\ConsoleCommand
          */
         $this->_createRole(User::ROLE_COORDINATOR_STATE, array(
             User::ROLE_USER,
+            Rbac::OP_ANSWER_CREATE,
+            Rbac::OP_ANSWER_UPDATE,
             Rbac::OP_COACH_SET_STATUS,
             Rbac::OP_COORDINATOR_SET_STATUS,
             Rbac::OP_DOCUMENT_CREATE,
@@ -103,6 +110,8 @@ class RbacCommand extends \console\ext\ConsoleCommand
          */
         $this->_createRole(User::ROLE_COORDINATOR_UKRAINE, array(
             User::ROLE_COORDINATOR_REGION,
+            Rbac::OP_ANSWER_DELETE,
+            Rbac::OP_QUESTION_DELETE,
         ));
 
         /**
@@ -162,6 +171,8 @@ class RbacCommand extends \console\ext\ConsoleCommand
 
     /**
      * Document operations
+     *
+     * @return void
      */
     protected function _operationsDocument()
     {
@@ -173,6 +184,8 @@ class RbacCommand extends \console\ext\ConsoleCommand
 
     /**
      * News operations
+     *
+     * @return void
      */
     protected function _operationsNews()
     {
@@ -205,7 +218,22 @@ class RbacCommand extends \console\ext\ConsoleCommand
     }
 
     /**
+     * Q&A operations
+     *
+     * @return void
+     */
+    protected function _operationsQa()
+    {
+        $this->auth->createOperation('answerCreate', 'Create answer');
+        $this->auth->createOperation('questionRead', 'Read question');
+        $this->auth->createOperation('questionUpdate', 'Update question');
+        $this->auth->createOperation('questionCreate', 'Create question');
+    }
+
+    /**
      * Create first admin user
+     *
+     * @return void
      */
     public function actionInitAdmin()
     {
@@ -238,7 +266,6 @@ class RbacCommand extends \console\ext\ConsoleCommand
             echo "Email: $email\n";
             echo "Password: $password\n";
         }
-
     }
 
 }

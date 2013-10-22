@@ -7,7 +7,7 @@ namespace common\models\Qa;
  *
  * @property-read Question $question
  */
-class Answer extends \common\ext\MongoDb\Document
+class Answer extends \web\ext\MongoDocument
 {
 
     /**
@@ -41,6 +41,12 @@ class Answer extends \common\ext\MongoDb\Document
     protected $_question;
 
     /**
+     * Author
+     * @var User
+     */
+    protected $_user;
+
+    /**
      * Returns related question
      *
      * @return Question
@@ -51,6 +57,19 @@ class Answer extends \common\ext\MongoDb\Document
             $this->_question = Question::model()->findByPk(new \MongoId($this->questionId));
         }
         return $this->_question;
+    }
+
+    /**
+     * Returns the post author
+     *
+     * @return User
+     */
+    public function getAuthor()
+    {
+        if ($this->_user === null) {
+            $this->_user = \common\models\User::model()->findByPk(new \MongoId($this->userId));
+        }
+        return $this->_user;
     }
 
     /**
@@ -124,16 +143,11 @@ class Answer extends \common\ext\MongoDb\Document
      */
     protected function beforeValidate()
     {
-        if (!parent::beforeValidate()) return false;
-
-        // Convert to string
-        $this->userId = (string)$this->userId;
-        $this->questionId = (string)$this->questionId;
-
-        // Set created date
-        if ($this->dateCreated == null) {
-            $this->dateCreated = time();
+        if (!parent::beforeValidate()) {
+            return false;
         }
+
+        $this->questionId = (string)$this->questionId;
 
         return true;
     }
@@ -152,5 +166,4 @@ class Answer extends \common\ext\MongoDb\Document
 
         parent::afterSave();
     }
-
 }

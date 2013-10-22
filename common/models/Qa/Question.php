@@ -2,9 +2,8 @@
 
 namespace common\models\Qa;
 
-class Question extends \common\ext\MongoDb\Document
+class Question extends \web\ext\MongoDocument
 {
-
     /**
      * User ID
      * @var string
@@ -108,25 +107,4 @@ class Question extends \common\ext\MongoDb\Document
             ),
         ));
     }
-
-    /**
-     * Before validate action
-     *
-     * @return bool
-     */
-    protected function beforeValidate()
-    {
-        if (!parent::beforeValidate()) return false;
-
-        // Convert to string
-        $this->userId = (string)$this->userId;
-
-        // Set created date
-        if ($this->dateCreated == null) {
-            $this->dateCreated = time();
-        }
-
-        return true;
-    }
-
 }
