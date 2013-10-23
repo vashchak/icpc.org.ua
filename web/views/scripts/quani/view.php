@@ -28,7 +28,7 @@
     <?php foreach ($answers as $answer): ?>
         <div class="row">
             <div class="col-xs-14 col-md-12">
-                <div class="panel panel-info">
+                <div class="panel <?php echo $answer->getAuthor()->isApprovedCoordinator ? 'panel-success' : 'panel-default'; ?>">
                     <div class="panel-heading"><?php echo $answer->getAuthor()->fio(); ?></div>
                     <div class="panel-body"><?php echo $answer->content; ?></div>
                     <div class="panel-footer text-muted"><?php echo date('Y-m-d H:i:s', $answer->dateCreated); ?></div>

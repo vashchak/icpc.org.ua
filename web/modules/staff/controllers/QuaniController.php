@@ -6,11 +6,11 @@ use \common\models\Qa;
 
 class QuaniController extends \web\modules\staff\ext\Controller
 {
+    /**
+     * Create a question
+     */
     public function actionCreate()
     {
-        /*if (\yii::app()->user->isGuest) {
-            $this->redirect('/quani');
-        }*/
         $question = new Qa\Question();
         if ($this->request->isPostRequest) {
             $this->applyChanges(
@@ -31,6 +31,11 @@ class QuaniController extends \web\modules\staff\ext\Controller
         );
     }
 
+    /**
+     * Update a question
+     *
+     * @param string $id mondoDB record key
+     */
     public function actionUpdate($id)
     {
         $question = Qa\Question::model()->findByPk(new \MongoId($id));
@@ -52,6 +57,11 @@ class QuaniController extends \web\modules\staff\ext\Controller
         );
     }
 
+    /**
+     * Create an answer to the question
+     *
+     * @param string $id mondoDB record key
+     */
     public function actionSaveAnswer($id)
     {
         $content = $this->request->getParam('content', '');
