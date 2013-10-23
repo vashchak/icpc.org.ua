@@ -10,7 +10,7 @@
     <h2><?php echo \yii::t('app', 'Edit the question'); ?></h2>
     <small>
         <b><?=\yii::t('app', 'Preview')?>:&nbsp;</b>
-        <a href="/quani/view/<?php echo (string)$question->_id; ?>" target="_blank"></a>
+        <a href="/qa/view/<?php echo (string)$question->_id; ?>" target="_blank"></a>
     </small>
 <?php endif; ?>
 
@@ -67,7 +67,7 @@
         $(".save-question").on("click", function(){
             $.ajax({
                 type: "POST",
-                url: "/staff/quani/<?php echo $question->isNewRecord ? "create" : "update/{$question->_id}"; ?>",
+                url: "/qa/<?php echo $question->isNewRecord ? "create" : "update/{$question->_id}"; ?>",
                 data: {
                     title: $("input[name=title]").val(),
                     content: window.editor.getData(),
@@ -75,7 +75,7 @@
                 },
                 success: function(data) {
                     if (data.status === 'success') {
-                        window.location = "/quani/view/" + data.id;
+                        window.location = "/qa/view/" + data.id;
                     } else {
                         appShowErrors(data.errors, $('.form-horizontal'));
                     }
@@ -101,7 +101,7 @@
                 callback(data);
             },
             ajax: {
-                url: "/quani/getTags",
+                url: "/qa/getTags",
                 dataType: 'json',
                 data: function (term, page) {
                     return {

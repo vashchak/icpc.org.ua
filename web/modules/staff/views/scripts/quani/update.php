@@ -1,1 +1,0 @@
-<?php include (__DIR__ . '/__form.php'); ?>

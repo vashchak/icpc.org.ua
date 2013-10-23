@@ -1,7 +1,4 @@
-<?php
-    \yii::app()->getClientScript()->registerCoreScript('ckeditor');
-    //$this->widget('\web\widgets\BreadCrumbs');
-?>
+<?php \yii::app()->getClientScript()->registerCoreScript('ckeditor'); ?>
 
 <h2><?php echo \yii::t('app', 'Tag creation'); ?></h2>
 <hr/>

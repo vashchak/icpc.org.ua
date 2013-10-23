@@ -52,7 +52,7 @@ class RbacCommand extends \console\ext\ConsoleCommand
         $guestOperationList = array(
             'documentRead',
             'newsRead',
-            'questionRead'
+            'qaQuestionRead'
         );
         $this->_assignOperations($guest, $guestOperationList);
 
@@ -65,8 +65,8 @@ class RbacCommand extends \console\ext\ConsoleCommand
         }
         $userOperationList = array(
             User::ROLE_GUEST,
-            'questionCreate',
-            'questionUpdateOwn'
+            'qaQuestionCreate',
+            'qaQuestionUpdateOwn'
         );
         $this->_assignOperations($user, $userOperationList);
 
@@ -91,8 +91,8 @@ class RbacCommand extends \console\ext\ConsoleCommand
         }
         $coachOperationList = array(
             User::ROLE_STUDENT,
-            'questionUpdate',
-            'answerCreate'
+            'qaQuestionUpdate',
+            'qaAnswerCreate'
         );
         $this->_assignOperations($coach, $coachOperationList);
 
@@ -166,11 +166,11 @@ class RbacCommand extends \console\ext\ConsoleCommand
         $bizRuleQuestionCreate    = 'return \yii::app()->rbac->bizRuleQuestionCreate($params);';
         $bizRuleUpdateOwnQuestion = 'return \yii::app()->rbac->bizRuleUpdateOwnQuestion($params);';
         $bizRuleAnswerCreate      = 'return \yii::app()->rbac->bizRuleAnswerCreate($params);';
-        $this->auth->createOperation('questionRead', 'Read question', $bizRuleQuestionRead);
-        $this->auth->createOperation('questionUpdate', 'Update question', $bizRuleQuestionUpdate);
-        $this->auth->createOperation('questionCreate', 'Create question', $bizRuleQuestionCreate);
-        $this->auth->createOperation('questionUpdateOwn', 'Update own question', $bizRuleUpdateOwnQuestion);
-        $this->auth->createOperation('answerCreate', 'Create answer', $bizRuleAnswerCreate);
+        $this->auth->createOperation('qaQuestionRead', 'Read question', $bizRuleQuestionRead);
+        $this->auth->createOperation('qaQuestionUpdate', 'Update question', $bizRuleQuestionUpdate);
+        $this->auth->createOperation('qaQuestionCreate', 'Create question', $bizRuleQuestionCreate);
+        $this->auth->createOperation('qaQuestionUpdateOwn', 'Update own question', $bizRuleUpdateOwnQuestion);
+        $this->auth->createOperation('qaAnswerCreate', 'Create answer', $bizRuleAnswerCreate);
     }
 
     /**

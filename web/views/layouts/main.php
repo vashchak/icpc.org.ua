@@ -87,7 +87,7 @@
                                 'caption'   => \yii::t('app', 'Results'),
                             ),
                             'quani' => array(
-                                'href'      => '/quani',
+                                'href'      => '/qa',
                                 'caption'   => \yii::t('app', 'Quani'),
                             ),
                             'tags' => array(

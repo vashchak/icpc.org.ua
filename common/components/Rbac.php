@@ -147,7 +147,7 @@ class Rbac extends \CApplicationComponent
      */
     public function bizRuleUpdateOwnQuestion(array $params)
     {
-        return \yii::app()->user->id == $params['userId'] || $this->checkAccess('admin');
+        return ((\yii::app()->user->id == (string)$params['userId']) || $this->checkAccess('admin')) ? true : false;
     }
 
     /**
