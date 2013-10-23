@@ -4,7 +4,7 @@
         $desc = is_string($tag) ? $tag : $tag->desc;
         $id = is_string($tag) ? $tag : (string)$tag->_id;
     ?>
-    <a href="/quani/tag/<?php echo \CHtml::encode($name); ?>">
+    <a href="/qa/tag/<?php echo \CHtml::encode($name); ?>">
         <span class="label label-<?php echo $this->colorize(); ?> tag"
               title="<?php echo $desc; ?>"
               data-name="<?php echo $name; ?>"

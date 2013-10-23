@@ -3,7 +3,7 @@
 <a class="btn btn-primary" href="/staff/tags/create"><?php echo \yii::t('app', 'Add a tag'); ?></a>
 <br/>
 <br/>
-<?php $this->widget('\web\widgets\quani\ListTags', array('tags' => $tags)); ?>
+<?php $this->widget('\web\widgets\qa\ListTags', array('tags' => $tags)); ?>
 
 <script>
     $(function(){

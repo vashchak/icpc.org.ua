@@ -115,7 +115,7 @@
                                 'caption'  => \yii::t('app', 'Teams'),
                                 ),
                             'quani' => array(
-                                'href'      => '/quani',
+                                'href'      => '/qa',
                                 'caption'   => \yii::t('app', 'Quani'),
                             ),
                             'tags' => array(

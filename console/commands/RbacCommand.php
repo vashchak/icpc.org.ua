@@ -104,20 +104,6 @@ class RbacCommand extends \console\ext\ConsoleCommand
         $this->_createRole(User::ROLE_COORDINATOR_REGION, array(
             User::ROLE_COORDINATOR_STATE,
         ));
-=======
-        $coordinator = $this->auth->getAuthItem(User::ROLE_COORDINATOR);
-        if (!$coordinator) {
-            $coordinator = $this->auth->createRole(User::ROLE_COORDINATOR);
-        }
-        $coordinatorOperationList = array(
-            User::ROLE_COACH,
-            'documentCreate',
-            'documentUpdate',
-            'newsCreate',
-            'newsUpdate',
-        );
-        $this->_assignOperations($coordinator, $coordinatorOperationList);
->>>>>>> 4397acd... #7 implemented quani functionality part.2
 
         /**
          * Coordinator of Ukraine role

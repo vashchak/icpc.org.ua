@@ -1,6 +1,6 @@
 <?php
 
-namespace web\widgets\quani;
+namespace web\widgets\qa;
 
 /**
  * Renders Application Environment label for development and production

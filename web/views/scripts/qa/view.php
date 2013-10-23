@@ -1,7 +1,7 @@
 <?php \yii::app()->getClientScript()->registerCoreScript('ckeditor'); ?>
 
-<?php if (\yii::app()->user->checkAccess('questionUpdateOwn', array('userId' => (string)$question->userId))): ?>
-    <a class="btn btn-warning" href="/staff/quani/update/<?php echo (string)$question->_id; ?>"><?php echo \yii::t('app', 'Edit'); ?></a>
+<?php if (\yii::app()->user->checkAccess('qaQuestionUpdateOwn', array('userId' => (string)$question->userId))): ?>
+    <a class="btn btn-warning" href="/qa/update/<?php echo (string)$question->_id; ?>"><?php echo \yii::t('app', 'Edit'); ?></a>
     <br/>
     <br/>
 <?php endif; ?>
@@ -12,7 +12,7 @@
     <div class="panel-footer text-muted">
         <div class="row">
             <div class="col-md-6 text-left">
-                <?php $this->widget('\web\widgets\quani\ListTags', array('tags' => $question->tagList)); ?>
+                <?php $this->widget('\web\widgets\qa\ListTags', array('tags' => $question->tagList)); ?>
             </div>
             <div class="col-md-6 text-right">
                 <em><?php echo $question->getAuthor()->fio(); ?></em>
@@ -75,13 +75,13 @@
             <?php if (!\yii::app()->user->isGuest): ?>
                 $.ajax({
                     type: "POST",
-                    url: "/staff/quani/saveAnswer/<?php echo (string)$question->_id; ?>",
+                    url: "/qa/saveAnswer/<?php echo (string)$question->_id; ?>",
                     data: {
                         content: window.editor.getData()
                     },
                     success: function(data) {
                         if (data.status === 'success') {
-                            window.location = "/quani/view/<?php echo (string)$question->_id; ?>";
+                            window.location = "/qa/view/<?php echo (string)$question->_id; ?>";
                         } else {
                             appShowErrors(data.errors, $('.form-horizontal'));
                         }
