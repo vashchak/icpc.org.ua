@@ -1,7 +1,7 @@
 <?php
     \yii::app()->getClientScript()->registerCoreScript('ckeditor');
     \yii::app()->getClientScript()->registerCoreScript('select2');
-    $this->widget('\web\widgets\BreadCrumbs');
+    //$this->widget('\web\widgets\BreadCrumbs');
 ?>
 
 <?php if ($question->isNewRecord): ?>

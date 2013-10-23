@@ -104,6 +104,24 @@ class RbacCommand extends \console\ext\ConsoleCommand
         $this->_createRole(User::ROLE_COORDINATOR_REGION, array(
             User::ROLE_COORDINATOR_STATE,
         ));
+=======
+        $coordinator = $this->auth->getAuthItem(User::ROLE_COORDINATOR);
+        if (!$coordinator) {
+            $coordinator = $this->auth->createRole(User::ROLE_COORDINATOR);
+        }
+        $coordinatorOperationList = array(
+            User::ROLE_COACH,
+            'documentCreate',
+            'documentUpdate',
+            'newsCreate',
+            'newsUpdate',
+            'questionCreate',
+            'questionUpdate',
+            'questionUpdateOwn',
+            'answerCreate'
+        );
+        $this->_assignOperations($coordinator, $coordinatorOperationList);
+>>>>>>> 4397acd... #7 implemented quani functionality part.2
 
         /**
          * Coordinator of Ukraine role
@@ -224,10 +242,14 @@ class RbacCommand extends \console\ext\ConsoleCommand
      */
     protected function _operationsQa()
     {
-        $this->auth->createOperation('answerCreate', 'Create answer');
-        $this->auth->createOperation('questionRead', 'Read question');
-        $this->auth->createOperation('questionUpdate', 'Update question');
-        $this->auth->createOperation('questionCreate', 'Create question');
+        $this->auth->createOperation(Rbac::OP_ANSWER_CREATE, 'Create answer');
+        $this->auth->createOperation(Rbac::OP_ANSWER_READ, 'Read answer');
+        $this->auth->createOperation(Rbac::OP_ANSWER_UPDATE, 'Update answer');
+        $this->auth->createOperation(Rbac::OP_ANSWER_DELETE, 'Delete answer');
+        $this->auth->createOperation(Rbac::OP_QUESTION_CREATE, 'Create question');
+        $this->auth->createOperation(Rbac::OP_QUESTION_READ, 'Read question');
+        $this->auth->createOperation(Rbac::OP_QUESTION_UPDATE, 'Update question');
+        $this->auth->createOperation(Rbac::OP_QUESTION_DELETE, 'Delete question');
     }
 
     /**

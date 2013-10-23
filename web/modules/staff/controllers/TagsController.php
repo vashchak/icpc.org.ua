@@ -10,6 +10,7 @@ class TagsController extends \web\modules\staff\ext\Controller
     {
         parent::init();
         $this->defaultAction = 'all';
+        $this->setNavActiveItem('main', 'tags');
     }
 
     public function actionAll()
@@ -17,6 +18,11 @@ class TagsController extends \web\modules\staff\ext\Controller
         $this->render('all', array(
             'tags' => Tag::model()->findAll()
         ));
+    }
+
+    public function actionIndex()
+    {
+        $this->forward('/staff/tags/all');
     }
 
     public function actionCreate()
@@ -28,7 +34,7 @@ class TagsController extends \web\modules\staff\ext\Controller
                 new Tag,
                 array(
                     'name' => $name,
-                    'desc' => $desc,
+                    'desc' => strip_tags($desc),
                 )
             );
         }

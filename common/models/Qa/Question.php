@@ -40,6 +40,12 @@ class Question extends \web\ext\MongoDocument
      * @var int
      */
     public $dateCreated;
+    
+    /**
+     * Author
+     * @var User
+     */
+    protected $_user;
 
     /**
      * Returns the attribute labels.
@@ -59,6 +65,19 @@ class Question extends \web\ext\MongoDocument
             'answerCount'   => \yii::t('app', 'Answer count'),
             'dateCreated'   => \yii::t('app', 'Registration date'),
         ));
+    }
+
+    /**
+     * Returns the post author
+     *
+     * @return User
+     */
+    public function getAuthor()
+    {
+        if ($this->_user === null) {
+            $this->_user = \common\models\User::model()->findByPk(new \MongoId($this->userId));
+        }
+        return $this->_user;
     }
 
     /**

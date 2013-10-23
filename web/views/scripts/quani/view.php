@@ -1,9 +1,7 @@
 <?php \yii::app()->getClientScript()->registerCoreScript('ckeditor'); ?>
 
-<?php $this->widget('\web\widgets\BreadCrumbs'); ?>
-
-<?php if (!\yii::app()->user->isGuest): ?>
-    <a class="btn btn-warning" href="/staff/quani/update/<?php echo $question->_id; ?>"><?php echo \yii::t('app', 'Update'); ?></a>
+<?php if (\yii::app()->user->checkAccess('questionUpdateOwn', array('userId' => (string)$question->userId))): ?>
+    <a class="btn btn-warning" href="/staff/quani/update/<?php echo (string)$question->_id; ?>"><?php echo \yii::t('app', 'Edit'); ?></a>
     <br/>
     <br/>
 <?php endif; ?>
@@ -11,18 +9,25 @@
     <input type="hidden" value="" name="<?php echo $question->_id; ?>" />
     <div class="panel-heading"><?php echo \CHtml::encode($question->title); ?></div>
     <div class="panel-body"><?php echo $question->content; ?></div>
-    <div class="panel-footer text-muted"><?php echo date('Y-m-d H:i:s', $question->dateCreated); ?></div>
+    <div class="panel-footer text-muted">
+        <div class="row">
+            <div class="col-md-6 text-left">
+                <?php $this->widget('\web\widgets\quani\ListTags', array('tags' => $question->tagList)); ?>
+            </div>
+            <div class="col-md-6 text-right">
+                <em><?php echo $question->getAuthor()->fio(); ?></em>
+                &nbsp;
+                <span class="text-muted"><?php echo date('Y-m-d H:i:s', $question->dateCreated); ?></span>
+            </div>
+        </div>
+    </div>
 </div>
-<p class="tagList">
-    <?php foreach ($question->tagList as $tag): ?>
-    <span class="label label-default"><?php echo \CHtml::encode($tag); ?></span>
-    <?php endforeach; ?>
-</p>
 <?php if ($question->answerCount): ?>
+    <h3><?php echo \yii::t('app', '{count} Answers', array('{count}' => $question->answerCount)); ?></h3>
+    <hr/>
     <?php foreach ($answers as $answer): ?>
         <div class="row">
-            <div class="col-xs-6 col-md-2"></div>
-            <div class="col-xs-12 col-md-10">
+            <div class="col-xs-14 col-md-12">
                 <div class="panel panel-info">
                     <div class="panel-heading"><?php echo $answer->getAuthor()->fio(); ?></div>
                     <div class="panel-body"><?php echo $answer->content; ?></div>
@@ -38,7 +43,7 @@
     </div>
 <?php endif; ?>
 
-<?php if (!\yii::app()->user->isGuest): ?>
+<?php if (\yii::app()->user->checkAccess('answerCreate')): ?>
     <div class="row">
         <div class="col-xs-6 col-md-2 text-right">
             <button type="button" class="btn answer-open">
@@ -46,24 +51,28 @@
             </button>
         </div>
         <div class="col-xs-12 col-md-10 answer-container">
-            <textarea id="answer-content"></textarea>
+            <div class="form-horizontal clearfix">
+                <div class="form-group">
+                    <textarea id="answer-content" name="content"></textarea>
+                </div>
+            </div>
             <br/>
             <button type="button" class="btn btn-primary answer-create">
-                <?php echo \yii::t('app', 'Submit'); ?>
+                <?php echo \yii::t('app', \yii::app()->user->isGuest ? 'Login' : 'Submit'); ?>
             </button>
         </div>
     </div>
 <?php endif; ?>
 
-<?php if (!\yii::app()->user->isGuest): ?>
-    <script>
-        $(function(){
-            window.editor = CKEDITOR.replace('answer-content', {
-                extraPlugins: 'onchange',
-                height: '200px'
-            });
+<script>
+    $(function(){
+        window.editor = CKEDITOR.replace('answer-content', {
+            extraPlugins: 'onchange',
+            height: '200px'
+        });
 
-            $(".answer-create").on('click', function(){
+        $(".answer-create").on('click', function(){
+            <?php if (!\yii::app()->user->isGuest): ?>
                 $.ajax({
                     type: "POST",
                     url: "/staff/quani/saveAnswer/<?php echo (string)$question->_id; ?>",
@@ -81,19 +90,21 @@
                         console.log('Unexpected server error: ', error);
                     }
                 });
-            });
+            <?php else: ?>
+                window.location = '/auth/login';
+            <?php endif; ?>
+        });
 
-            $('.answer-open').on('click', function(){
-                var $container = $('.answer-container').eq(0);
-                var $btnOpen = $('.answer-open').eq(0);
-                $container.toggle("slow", function(){
-                    if ($(':visible', $container).length) {
-                        $btnOpen.html('<?php echo \yii::t('app', 'Close answer form'); ?>');
-                    } else {
-                        $btnOpen.html('<?php echo \yii::t('app', 'Open answer form'); ?>');
-                    }
-                });
+        $('.answer-open').on('click', function(){
+            var $container = $('.answer-container').eq(0);
+            var $btnOpen = $('.answer-open').eq(0);
+            $container.toggle("slow", function(){
+                if ($(':visible', $container).length) {
+                    $btnOpen.html('<?php echo \yii::t('app', 'Close answer form'); ?>');
+                } else {
+                    $btnOpen.html('<?php echo \yii::t('app', 'Open answer form'); ?>');
+                }
             });
         });
-    </script>
-<?php endif; ?>
+    });
+</script>
