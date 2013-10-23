@@ -115,10 +115,6 @@ class RbacCommand extends \console\ext\ConsoleCommand
             'documentUpdate',
             'newsCreate',
             'newsUpdate',
-            'questionCreate',
-            'questionUpdate',
-            'questionUpdateOwn',
-            'answerCreate'
         );
         $this->_assignOperations($coordinator, $coordinatorOperationList);
 >>>>>>> 4397acd... #7 implemented quani functionality part.2
