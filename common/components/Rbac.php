@@ -140,6 +140,17 @@ class Rbac extends \CApplicationComponent
     }
 
     /**
+     * Question update by author
+     *
+     * @param array $params
+     * @return boolean
+     */
+    public function bizRuleUpdateOwnQuestion(array $params)
+    {
+        return \yii::app()->user->id == $params['userId'] || $this->checkAccess('admin');
+    }
+
+    /**
      * Answer update rule
      *
      * @param array $params

@@ -84,23 +84,23 @@ class Controller extends \web\ext\Controller
         return array_merge(parent::accessRules(), array(
             array(
                 'allow',
-                'controllers'   => array('staff/docs', 'staff/news'),
+                'controllers'   => array('staff/quani'),
+                'roles'         => array(User::ROLE_USER),
+            ),
+            array(
+                'allow',
+                'controllers'   => array('staff/docs', 'staff/news', 'staff/quani', 'staff/tags'),
                 'roles'         => array(User::ROLE_COORDINATOR),
             ),
             array(
                 'allow',
-                'controllers'   => array('staff/index'),
+                'controllers'   => array('staff/index', 'staff/quani', 'staff/tags'),
                 'roles'         => array(User::ROLE_COORDINATOR_UKRAINE),
             ),
             array(
                 'allow',
                 'controllers'   => array('staff/lang'),
                 'roles'         => array(User::ROLE_ADMIN),
-            ),
-            array(
-                'allow',
-                'controllers'   => array('staff/quani'),
-                'roles'         => array(User::ROLE_COORDINATOR),
             ),
             array(
                 'deny',

@@ -6,6 +6,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title><?=$this->pageTitle?></title>
     <link rel="icon" type="image/x-icon" href="<?=\yii::app()->theme->baseUrl?>/favicon.ico" />
+    <style>
+        .tag {cursor: pointer;}
+    </style>
 
     <?php
         $cs = \yii::app()->getClientScript();
@@ -86,6 +89,11 @@
                             'quani' => array(
                                 'href'      => '/quani',
                                 'caption'   => \yii::t('app', 'Quani'),
+                            ),
+                            'tags' => array(
+                                'href'      => '/staff/tags/all',
+                                'caption'   => \yii::t('app', 'Tags'),
+                                'rbac'      => \common\models\User::ROLE_COORDINATOR,
                             ),
                             'staff' => array(
                                 'href'      => $this->createUrl('/staff'),

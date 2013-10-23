@@ -70,6 +70,14 @@ class AuthController extends \web\ext\Controller
     }
 
     /**
+     * Index page is absent
+     */
+    public function actionIndex()
+    {
+        $this->forward('/auth/login');
+    }
+
+    /**
      * Login page
      */
     public function actionLogin()

@@ -50,6 +50,26 @@ class QuaniController extends \web\ext\Controller
         );
     }
 
+    public function actionTag($id)
+    {
+        $criteria = new \EMongoCriteria();
+        $criteria->addCond('tagList', '==', $id);
+        $criteria->setLimit(10);
+        $criteria->setSort(array(
+            'dateCreated' => \EMongoCriteria::SORT_DESC
+        ));
+        $pages = new \CPagination(Qa\Question::model()->count());
+        $pages->pageSize = 10;
+        $q = Qa\Question::model()->findAll($criteria);
+        $this->render(
+            'index',
+            array(
+                'q' => $q,
+                'pages' => $pages
+            )
+        );
+    }
+
     public function actionGetTags()
     {
         $q = mb_strtolower($this->request->getParam('q', ''));
