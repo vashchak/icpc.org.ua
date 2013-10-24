@@ -74,6 +74,14 @@ $config = array(
                     ),
                     'depends' => array('jquery'),
                 ),
+                'respond' => array(
+                    'js' => array(
+                        'lib/Respond/respond.min.js'
+                    ),
+                    'css' => array(
+                    ),
+                    'depends' => array('jquery'),
+                ),
             ),
         ),
 

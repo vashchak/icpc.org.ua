@@ -89,7 +89,12 @@ class Controller extends \web\ext\Controller
             ),
             array(
                 'allow',
-                'controllers'   => array('staff/index'),
+                'controllers'   => array('staff/coaches'),
+                'roles'         => array(User::ROLE_COORDINATOR_STATE),
+            ),
+            array(
+                'allow',
+                'controllers'   => array('staff/coordinators'),
                 'roles'         => array(User::ROLE_COORDINATOR_UKRAINE),
             ),
             array(

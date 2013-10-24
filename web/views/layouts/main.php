@@ -4,6 +4,7 @@
 <head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title><?=$this->pageTitle?></title>
     <link rel="icon" type="image/x-icon" href="<?=\yii::app()->theme->baseUrl?>/favicon.ico" />
     <style>
@@ -18,6 +19,11 @@
 
         // Bootsrtap
         $cs->registerCoreScript('bootstrap');
+
+        // Respond
+        if (\yii::app()->request->userAgentIsIe()) {
+            $cs->registerCoreScript('respond');
+        }
 
         // App JS
         $cs->registerScriptFile($cs->getCoreScriptUrl() . '/min/?g=js&v=' . \yii::app()->params['version']);
@@ -99,6 +105,21 @@
                                 'href'      => $this->createUrl('/staff'),
                                 'caption'   => \yii::t('app', 'Staff'),
                                 'rbac'      => \common\models\User::ROLE_COORDINATOR_UKRAINE,
+                            ),
+                            'users' => array(
+                                'href'      => '#',
+                                'caption'   => \yii::t('app', 'Users'),
+                                'rbac'      => \common\models\User::ROLE_COORDINATOR_UKRAINE,
+                                'itemList'  => array(
+                                    'users-coordinators' => array(
+                                        'href'      => $this->createUrl('/staff/coordinators'),
+                                        'caption'   => \yii::t('app', 'Coordinators'),
+                                    ),
+                                    'users-coaches' => array(
+                                        'href'      => $this->createUrl('/staff/coaches'),
+                                        'caption'   => \yii::t('app', 'Coaches'),
+                                    ),
+                                ),
                             ),
                             'lang' => array(
                                 'href'      => $this->createUrl('/staff/lang'),
