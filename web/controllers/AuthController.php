@@ -93,7 +93,7 @@ class AuthController extends \web\ext\Controller
             $identity = new \web\ext\UserIdentity($email, $password);
             if ($identity->authenticate()) {
                 \yii::app()->user->login($identity);
-                return $this->redirect('/');
+                return $this->redirect(\yii::app()->user->returnUrl);
             } else {
                 $error = $identity->errorMessage;
             }

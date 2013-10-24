@@ -3,7 +3,7 @@
 <a class="btn btn-primary" href="/staff/tags/create"><?php echo \yii::t('app', 'Add a tag'); ?></a>
 <br/>
 <br/>
-<?php $this->widget('\web\widgets\qa\ListTags', array('tags' => $tags)); ?>
+<?php $this->widget('\web\widgets\qa\ListTags', array('tags' => $tags, 'mode' => 'table')); ?>
 
 <script>
     $(function(){
@@ -18,13 +18,16 @@
                             $el.remove();
                         }
                     },
-                    error: function(error) {
-                        console.log('Unexpected server error: ', error);
+                    error: function(xhr) {
+                        if (parseInt(xhr.status) === 403) {
+                            alert('<?php echo \yii::t('app', 'You are forbidden to perform this action'); ?>');
+                        } else {
+                            console.log('Unexpected server error: ', xhr.statusText);
+                        }
                     }
                 });
-            } else {
-
             }
+            return false;
         });
     });
 </script>

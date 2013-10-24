@@ -9,6 +9,8 @@
     <link rel="icon" type="image/x-icon" href="<?=\yii::app()->theme->baseUrl?>/favicon.ico" />
     <style>
         .tag {cursor: pointer;}
+        .tag:hover {text-decoration: none;}
+        td.tagCell {width: 230px;}
     </style>
 
     <?php
@@ -94,6 +96,14 @@
                             'results' => array(
                                 'href'      => '/results',
                                 'caption'   => \yii::t('app', 'Results'),
+                            ),
+                            'qa' => array(
+                                'href'      => '/qa',
+                                'caption'   => \yii::t('app', 'Q & A'),
+                            ),
+                            'tags' => array(
+                                'href'      => '/staff/tags/all',
+                                'caption'   => \yii::t('app', 'Tags'),
                             ),
                             'users' => array(
                                 'href'      => '#',

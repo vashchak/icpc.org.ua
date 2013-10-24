@@ -41,26 +41,24 @@
     </div>
 <?php endif; ?>
 
-<?php if (\yii::app()->user->checkAccess('answerCreate')): ?>
-    <div class="row">
-        <div class="col-xs-6 col-md-2 text-right">
-            <button type="button" class="btn answer-open">
-                <?php echo \yii::t('app', 'Close answer form'); ?>
-            </button>
-        </div>
-        <div class="col-xs-12 col-md-10 answer-container">
-            <div class="form-horizontal clearfix">
-                <div class="form-group">
-                    <textarea id="answer-content" name="content"></textarea>
-                </div>
-            </div>
-            <br/>
-            <button type="button" class="btn btn-primary answer-create">
-                <?php echo \yii::t('app', \yii::app()->user->isGuest ? 'Login' : 'Submit'); ?>
-            </button>
-        </div>
+<div class="row">
+    <div class="col-xs-6 col-md-2 text-right">
+        <button type="button" class="btn answer-open">
+            <?php echo \yii::t('app', 'Close answer form'); ?>
+        </button>
     </div>
-<?php endif; ?>
+    <div class="col-xs-12 col-md-10 answer-container">
+        <div class="form-horizontal clearfix">
+            <div class="form-group">
+                <textarea id="answer-content" name="content"></textarea>
+            </div>
+        </div>
+        <br/>
+        <button type="button" class="btn btn-primary answer-create">
+            <?php echo \yii::t('app', \yii::app()->user->isGuest ? 'Login' : 'Submit'); ?>
+        </button>
+    </div>
+</div>
 
 <script>
     $(function(){
@@ -70,27 +68,27 @@
         });
 
         $(".answer-create").on('click', function(){
-            <?php if (!\yii::app()->user->isGuest): ?>
-                $.ajax({
-                    type: "POST",
-                    url: "/qa/saveAnswer/<?php echo (string)$question->_id; ?>",
-                    data: {
-                        content: window.editor.getData()
-                    },
-                    success: function(data) {
-                        if (data.status === 'success') {
-                            window.location = "/qa/view/<?php echo (string)$question->_id; ?>";
-                        } else {
-                            appShowErrors(data.errors, $('.form-horizontal'));
-                        }
-                    },
-                    error: function(error) {
-                        console.log('Unexpected server error: ', error);
+            $.ajax({
+                type: "POST",
+                url: "/qa/saveAnswer/<?php echo (string)$question->_id; ?>",
+                data: {
+                    content: window.editor.getData()
+                },
+                success: function(data) {
+                    if (data.status === 'success') {
+                        window.location = "/qa/view/<?php echo (string)$question->_id; ?>";
+                    } else {
+                        appShowErrors(data.errors, $('.form-horizontal'));
                     }
-                });
-            <?php else: ?>
-                window.location = '/auth/login';
-            <?php endif; ?>
+                },
+                error: function(xhr) {
+                    if (parseInt(xhr.status) === 403) {
+                        window.location = "/auth/login";
+                    } else {
+                        console.log('Unexpected server error: ', xhr.statusText);
+                    }
+                }
+            });
         });
 
         $('.answer-open').on('click', function(){

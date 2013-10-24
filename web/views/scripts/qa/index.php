@@ -1,4 +1,4 @@
-<h2><?php echo \yii::t('app', 'Latest questions'); ?></h2>
+<h2><?php echo $tagMode ? \yii::t('app', 'Latest "{tagName}" questions', array('{tagName}' => $tagName)) : \yii::t('app', 'Latest questions'); ?></h2>
 <hr/>
 <a class="btn btn-primary" href="/qa/create"><?php echo \yii::t('app', 'Ask a question'); ?></a>
 <br/>
