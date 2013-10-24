@@ -14,7 +14,6 @@
                     type: "POST",
                     url: "/staff/tags/delete/" + $el.data('id'),
                     success: function(data) {
-                        console.log(data);
                         if (data.result) {
                             $el.remove();
                         }
@@ -23,6 +22,8 @@
                         console.log('Unexpected server error: ', error);
                     }
                 });
+            } else {
+
             }
         });
     });

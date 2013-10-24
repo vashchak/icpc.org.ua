@@ -125,7 +125,7 @@ class Rbac extends \CApplicationComponent
      */
     public function bizRuleQuestionUpdate(array $params)
     {
-        return !\yii::app()->user->isGuest;
+        return $this->checkAccess('admin');
     }
 
     /**
@@ -147,7 +147,10 @@ class Rbac extends \CApplicationComponent
      */
     public function bizRuleUpdateOwnQuestion(array $params)
     {
-        return ((\yii::app()->user->id == (string)$params['userId']) || $this->checkAccess('admin')) ? true : false;
+        $q = \common\models\Qa\Question::model()->findByPk(
+            new \MongoId(\yii::app()->request->getParam('id', ''))
+        );
+        return (\yii::app()->user->id == (string)$q->userId) || $this->checkAccess('admin');
     }
 
     /**

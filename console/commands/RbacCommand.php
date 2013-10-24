@@ -40,7 +40,7 @@ class RbacCommand extends \console\ext\ConsoleCommand
          */
         $this->_operationsDocument();
         $this->_operationsNews();
-        $this->_operationsQuani();
+        $this->_operationsQa();
 
         /**
          * Guest role
@@ -159,7 +159,7 @@ class RbacCommand extends \console\ext\ConsoleCommand
      *
      * @return void
      */
-    protected function _operationsQuani()
+    protected function _operationsQa()
     {
         $bizRuleQuestionRead      = 'return \yii::app()->rbac->bizRuleQuestionRead($params);';
         $bizRuleQuestionUpdate    = 'return \yii::app()->rbac->bizRuleQuestionUpdate($params);';
