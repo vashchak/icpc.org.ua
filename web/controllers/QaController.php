@@ -60,7 +60,8 @@ class QaController extends \web\ext\Controller
             'index',
             array(
                 'q' => $q,
-                'pages' => $pages
+                'pages' => $pages,
+                'tagMode' => false
             )
         );
     }
@@ -186,7 +187,9 @@ class QaController extends \web\ext\Controller
             'index',
             array(
                 'q' => $q,
-                'pages' => $pages
+                'pages' => $pages,
+                'tagMode' => true,
+                'tagName' => $id,
             )
         );
     }

@@ -9,6 +9,8 @@ class ListTags extends \web\ext\Widget
 {
     public $tags;
     public $effects = true;
+    public $mode = 'inline';
+    public $tableRows = 4;
     protected $styles = array(
         'default',
         'primary',
@@ -20,7 +22,16 @@ class ListTags extends \web\ext\Widget
 
     public function run()
     {
-        $this->render('listTags');
+        switch ($this->mode) {
+            case 'inline':
+                $this->render('listTags_inline');
+                break;
+            case 'table':
+                $this->render('listTags_table');
+                break;
+            default:
+                $this->render('listTags_inline');
+        }
     }
 
     protected function colorize()

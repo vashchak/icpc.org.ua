@@ -64,9 +64,7 @@ class RbacCommand extends \console\ext\ConsoleCommand
             $user = $this->auth->createRole(User::ROLE_USER);
         }
         $userOperationList = array(
-            User::ROLE_GUEST,
-            'qaQuestionCreate',
-            'qaQuestionUpdateOwn'
+            User::ROLE_GUEST
         );
         $this->_assignOperations($user, $userOperationList);
 
@@ -79,6 +77,8 @@ class RbacCommand extends \console\ext\ConsoleCommand
         }
         $studentOperationList = array(
             User::ROLE_USER,
+            'qaQuestionCreate',
+            'qaQuestionUpdateOwn'
         );
         $this->_assignOperations($student, $studentOperationList);
 

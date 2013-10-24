@@ -84,12 +84,19 @@ class Controller extends \web\ext\Controller
         return array_merge(parent::accessRules(), array(
             array(
                 'allow',
-                'controllers'   => array('staff/docs', 'staff/news', 'staff/tags'),
-                'roles'         => array(User::ROLE_COORDINATOR),
+                'controllers'   => array('staff/tags'),
+                'actions'       => array('index', 'all'),
+                'roles'         => array(User::ROLE_GUEST),
+            ),
+            array(
+                'deny',
+                'controllers'   => array('staff/tags'),
+                'actions'       => array('create', 'delete'),
+                'roles'         => array(User::ROLE_GUEST),
             ),
             array(
                 'allow',
-                'controllers'   => array('staff/coaches'),
+                'controllers'   => array('staff/docs', 'staff/news', 'staff/tags', 'staff/coaches'),
                 'roles'         => array(User::ROLE_COORDINATOR_STATE),
             ),
             array(
