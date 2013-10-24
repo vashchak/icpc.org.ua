@@ -29,6 +29,12 @@ class Answer extends \web\ext\MongoDocument
     public $content;
 
     /**
+     * List of comments
+     * @var array
+     */
+    public $comments = array();
+    
+    /**
      * Date created
      * @var int
      */

@@ -29,6 +29,12 @@ class Question extends \web\ext\MongoDocument
     public $tagList = array();
 
     /**
+     * List of comments
+     * @var array
+     */
+    public $comments = array();
+
+    /**
      * Count of given answers
      * @var int
      * @see Answer::afterSave()
@@ -40,7 +46,7 @@ class Question extends \web\ext\MongoDocument
      * @var int
      */
     public $dateCreated;
-    
+
     /**
      * Author
      * @var User
