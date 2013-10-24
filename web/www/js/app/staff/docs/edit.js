@@ -9,7 +9,9 @@ function appStaffDocsEdit() {
 
     // On change
     $('input, textarea, select', $form).on('keydown change', function() {
-        self.onchange();
+        if ((self.uploader.files.length > 0) || ($('[name=id]', $form).val().length > 0)) {
+            self.onchange();
+        }
     });
 
     // Save news
@@ -63,11 +65,6 @@ appStaffDocsEdit.prototype.initUploader = function () {
         multi_selection:  false,
         url:              app.baseUrl + '/upload/document',
         multipart_params: {},
-//        flash_swf_url: '/plupload/js/plupload.flash.swf',
-//        silverlight_xap_url: '/plupload/js/plupload.silverlight.xap',
-//        filters: [
-//            {title: "Documents", extensions: "pdf"},
-//        ],
         resize: {width: 320, height: 240, quality: 90}
     });
 
@@ -94,7 +91,6 @@ appStaffDocsEdit.prototype.initUploader = function () {
     });
 
     self.uploader.bind('UploadProgress', function(up, file) {
-        console.log('UploadProgress');
         $('#' + file.id + " b").html(file.percent + "%");
     });
 
