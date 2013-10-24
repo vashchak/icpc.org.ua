@@ -36,18 +36,14 @@
     <?php endforeach; ?>
 <?php else: ?>
     <div class="row">
-        <div class="col-xs-6 col-md-2 text-right"><h4><?php echo \yii::t('app', 'There isn\'t a single answer'); ?></h4></div>
-        <div class="col-xs-12 col-md-10"></div>
+        <div class="col-xs-14 col-md-12">
+            <h4><?php echo \yii::t('app', 'There isn\'t a single answer'); ?></h4>
+        </div>
     </div>
 <?php endif; ?>
 
 <div class="row">
-    <div class="col-xs-6 col-md-2 text-right">
-        <button type="button" class="btn answer-open">
-            <?php echo \yii::t('app', 'Close answer form'); ?>
-        </button>
-    </div>
-    <div class="col-xs-12 col-md-10 answer-container">
+    <div class="col-xs-14 col-md-12 answer-container">
         <div class="form-horizontal clearfix">
             <div class="form-group">
                 <textarea id="answer-content" name="content"></textarea>
@@ -87,18 +83,6 @@
                     } else {
                         console.log('Unexpected server error: ', xhr.statusText);
                     }
-                }
-            });
-        });
-
-        $('.answer-open').on('click', function(){
-            var $container = $('.answer-container').eq(0);
-            var $btnOpen = $('.answer-open').eq(0);
-            $container.toggle("slow", function(){
-                if ($(':visible', $container).length) {
-                    $btnOpen.html('<?php echo \yii::t('app', 'Close answer form'); ?>');
-                } else {
-                    $btnOpen.html('<?php echo \yii::t('app', 'Open answer form'); ?>');
                 }
             });
         });
