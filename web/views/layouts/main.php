@@ -114,9 +114,9 @@
                                 'href'     => $this->createUrl('/team/list'),
                                 'caption'  => \yii::t('app', 'Teams'),
                                 ),
-                            'quani' => array(
+                            'qa' => array(
                                 'href'      => '/qa',
-                                'caption'   => \yii::t('app', 'Quani'),
+                                'caption'   => \yii::t('app', 'Q & A'),
                             ),
                             'tags' => array(
                                 'href'      => '/staff/tags/all',

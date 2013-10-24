@@ -10,7 +10,7 @@ class QaController extends \web\ext\Controller
     {
         parent::init();
         $this->defaultAction = 'latest';
-        $this->setNavActiveItem('main', 'quani');
+        $this->setNavActiveItem('main', 'qa');
     }
 
     public function filters()
@@ -24,15 +24,28 @@ class QaController extends \web\ext\Controller
     {
         return array(
             array(
-                'deny',
-                'actions' => array('create', 'update'),
+                'allow',
+                'actions' => array('create'),
                 'roles' => array('qaQuestionCreate'),
+            ),
+            array(
+                'allow',
+                'actions' => array('update'),
+                'roles' => array('qaQuestionUpdateOwn'),
             ),
             array(
                 'allow',
                 'actions' => array('saveAnswer'),
                 'roles' => array('qaAnswerCreate'),
             ),
+            array(
+                'allow',
+                'actions' => array('latest', 'view', 'tag'),
+                'users' => array('*'),
+            ),
+            array(
+                'deny',
+            )
         );
     }
 

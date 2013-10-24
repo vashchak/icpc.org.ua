@@ -1,10 +1,8 @@
 <?php \yii::app()->getClientScript()->registerCoreScript('ckeditor'); ?>
 
-<?php if (\yii::app()->user->checkAccess('qaQuestionUpdateOwn', array('userId' => (string)$question->userId))): ?>
-    <a class="btn btn-warning" href="/qa/update/<?php echo (string)$question->_id; ?>"><?php echo \yii::t('app', 'Edit'); ?></a>
-    <br/>
-    <br/>
-<?php endif; ?>
+<a class="btn btn-warning" href="/qa/update/<?php echo (string)$question->_id; ?>"><?php echo \yii::t('app', 'Edit'); ?></a>
+<br/>
+<br/>
 <div class="panel panel-primary">
     <input type="hidden" value="" name="<?php echo $question->_id; ?>" />
     <div class="panel-heading"><?php echo \CHtml::encode($question->title); ?></div>
