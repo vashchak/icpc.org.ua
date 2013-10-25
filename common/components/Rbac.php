@@ -163,4 +163,15 @@ class Rbac extends \CApplicationComponent
     {
         return !\yii::app()->user->isGuest;
     }
+
+    /**
+     * Create a comment
+     *
+     * @param array $params
+     * @return boolean
+     */
+    public function bizRuleQaAddComment(array $params)
+    {
+        return !\yii::app()->user->isGuest;
+    }
 }

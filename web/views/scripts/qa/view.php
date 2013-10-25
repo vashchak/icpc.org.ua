@@ -1,10 +1,10 @@
 <?php \yii::app()->getClientScript()->registerCoreScript('ckeditor'); ?>
+<?php \yii::app()->getClientScript()->registerCoreScript('underscore'); ?>
 
 <a class="btn btn-warning" href="/qa/update/<?php echo (string)$question->_id; ?>"><?php echo \yii::t('app', 'Edit'); ?></a>
 <br/>
 <br/>
 <div class="panel panel-primary">
-    <input type="hidden" value="" name="<?php echo $question->_id; ?>" />
     <div class="panel-heading"><?php echo \CHtml::encode($question->title); ?></div>
     <div class="panel-body"><?php echo $question->content; ?></div>
     <div class="panel-footer text-muted">
@@ -20,6 +20,15 @@
         </div>
     </div>
 </div>
+
+<?php $this->widget('\web\widgets\qa\ListComments', array(
+    'comments' => $question->comments,
+    'entity' => array(
+        'entity' => 'question',
+        'id' => (string)$question->_id
+    )
+)); ?>
+
 <?php if ($question->answerCount): ?>
     <h3><?php echo \yii::t('app', '{count} Answers', array('{count}' => $question->answerCount)); ?></h3>
     <hr/>
@@ -28,11 +37,19 @@
             <div class="col-xs-14 col-md-12">
                 <div class="panel <?php echo $answer->getAuthor()->isApprovedCoordinator ? 'panel-success' : 'panel-default'; ?>">
                     <div class="panel-heading"><?php echo $answer->getAuthor()->fio(); ?></div>
-                    <div class="panel-body"><?php echo $answer->content; ?></div>
+                    <div class="panel-body"><?php echo \CHtml::encode($answer->content); ?></div>
                     <div class="panel-footer text-muted"><?php echo date('Y-m-d H:i:s', $answer->dateCreated); ?></div>
                 </div>
             </div>
         </div>
+        <?php $this->widget('\web\widgets\qa\ListComments', array(
+            'comments' => $answer->comments,
+            'entity' => array(
+                'entity' => 'answer',
+                'id' => (string)$answer->_id
+            )
+        )); ?>
+        <br/>
     <?php endforeach; ?>
 <?php else: ?>
     <div class="row">
@@ -40,6 +57,7 @@
             <h4><?php echo \yii::t('app', 'There isn\'t a single answer'); ?></h4>
         </div>
     </div>
+    <br/>
 <?php endif; ?>
 
 <div class="row">

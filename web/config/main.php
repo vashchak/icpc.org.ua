@@ -82,6 +82,11 @@ $config = array(
                     ),
                     'depends' => array('jquery'),
                 ),
+                'underscore' => array(
+                    'js' => array(
+                        'lib/underscore/underscore-min.js'
+                    ),
+                ),
             ),
         ),
 

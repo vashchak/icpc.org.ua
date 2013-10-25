@@ -11,6 +11,10 @@
         .tag {cursor: pointer;}
         .tag:hover {text-decoration: none;}
         td.tagCell {width: 230px;}
+        .comment {border-bottom: dotted; border-width: 1px;}
+        .row {margin-right: 0px; margin-left: 0px}
+        .comment-add-btn, .comment-subcontainer {margin-top:5px;}
+        .comment-content {width: 640px; height: 80px;}
     </style>
 
     <?php
@@ -41,6 +45,22 @@
 <body>
 
     <?php $this->widget('\web\widgets\AppEnv'); ?>
+
+    <script type="text/html" id="tmpl_comment">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-10 text-left comment">
+                <p><%= content %></p>
+                <div class="text-right text-muted">
+                    <em><%= author_fio %></em>
+                    &nbsp;
+                    <span><%= date_created %></span>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <input type="hidden" id="current_user" value="<?php echo \yii::app()->user->getInstance()->fio(); ?>" />
 
     <div id="main">
 

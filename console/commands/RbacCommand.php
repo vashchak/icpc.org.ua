@@ -78,7 +78,8 @@ class RbacCommand extends \console\ext\ConsoleCommand
         $studentOperationList = array(
             User::ROLE_USER,
             'qaQuestionCreate',
-            'qaQuestionUpdateOwn'
+            'qaQuestionUpdateOwn',
+            'qaAddComment'
         );
         $this->_assignOperations($student, $studentOperationList);
 
@@ -178,11 +179,13 @@ class RbacCommand extends \console\ext\ConsoleCommand
         $bizRuleQuestionCreate    = 'return \yii::app()->rbac->bizRuleQuestionCreate($params);';
         $bizRuleUpdateOwnQuestion = 'return \yii::app()->rbac->bizRuleUpdateOwnQuestion($params);';
         $bizRuleAnswerCreate      = 'return \yii::app()->rbac->bizRuleAnswerCreate($params);';
+        $bizRuleQaAddComment      = 'return \yii::app()->rbac->bizRuleQaAddComment($params);';
         $this->auth->createOperation('qaQuestionRead', 'Read question', $bizRuleQuestionRead);
         $this->auth->createOperation('qaQuestionUpdate', 'Update question', $bizRuleQuestionUpdate);
         $this->auth->createOperation('qaQuestionCreate', 'Create question', $bizRuleQuestionCreate);
         $this->auth->createOperation('qaQuestionUpdateOwn', 'Update own question', $bizRuleUpdateOwnQuestion);
         $this->auth->createOperation('qaAnswerCreate', 'Create answer', $bizRuleAnswerCreate);
+        $this->auth->createOperation('qaAddComment', 'Add comment', $bizRuleQaAddComment);
     }
 
     /**
