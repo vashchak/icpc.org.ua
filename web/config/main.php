@@ -84,8 +84,12 @@ $config = array(
                         'lib/select2/select2-bootstrap.css'
                     ),
                     'depends' => array('jquery'),
-                )
-
+                ),
+                'underscore' => array(
+                    'js' => array(
+                        'lib/underscore/underscore-min.js'
+                    ),
+                ),
             ),
         ),
 

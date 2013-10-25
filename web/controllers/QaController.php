@@ -40,7 +40,7 @@ class QaController extends \web\ext\Controller
             ),
             array(
                 'allow',
-                'actions' => array('latest', 'view', 'tag'),
+                'actions' => array('latest', 'view', 'tag', 'addComment'),
                 'users' => array('*'),
             ),
             array(
@@ -211,6 +211,45 @@ class QaController extends \web\ext\Controller
                 'tags' => $this->simplifyData($tags),
             )
         );
+    }
+
+    public function actionAddComment()
+    {
+        $id = $this->request->getParam('id', '');
+        $entity = $this->request->getParam('entity', 'question');
+        $content = $this->request->getParam('content', '');
+        $className = '\common\models\Qa\\' . \yii::app()->string->mb_ucfirst($entity);
+        $model = $className::model()->findByPk(new \MongoId($id));
+        if ($model && $this->request->isPostRequest) {
+            $comment = new Qa\CommentMapper();
+            $comment->setContent($content);
+            if (!$comment->hasErrors()) {
+                $model->comments[] = $comment->getData();
+            } else {
+                $_['status'] = 'error';
+                $_['errors'] = $comment->getErrors();
+                $this->renderJson($_);
+            }
+            $_['errors'] = array();
+            try {
+                if ($model->save()) {
+                    $_['status'] = 'success';
+                    $_['id'] = (string)$model->_id;
+                } else {
+                    $_['status'] = 'error';
+                    $_['errors'] = $model->getErrors();
+                }
+            } catch (\Exception $e) {
+                $_['status'] = 'error';
+                $_['errors']['common'] = $e->getMessage();
+            }
+            $this->renderJson($_);
+        }
+        $this->renderJson(array(
+            'errors' => array(
+                'common' => \yii::t('app', 'Bad request')
+            )
+        ));
     }
 
     protected function simplifyData($data)
