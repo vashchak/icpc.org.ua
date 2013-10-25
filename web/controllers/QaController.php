@@ -30,6 +30,11 @@ class QaController extends \web\ext\Controller
             ),
             array(
                 'allow',
+                'actions' => array('addComment'),
+                'roles' => array('qaAddComment'),
+            ),
+            array(
+                'allow',
                 'actions' => array('update'),
                 'roles' => array('qaQuestionUpdateOwn'),
             ),
