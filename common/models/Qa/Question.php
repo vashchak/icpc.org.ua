@@ -2,7 +2,7 @@
 
 namespace common\models\Qa;
 
-class Question extends \web\ext\MongoDocument
+class Question extends \common\ext\MongoDocument
 {
     /**
      * User ID

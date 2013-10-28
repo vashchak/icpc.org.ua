@@ -89,12 +89,6 @@ class Controller extends \web\ext\Controller
                 'roles'         => array(User::ROLE_GUEST),
             ),
             array(
-                'deny',
-                'controllers'   => array('staff/tags'),
-                'actions'       => array('create', 'delete'),
-                'roles'         => array(User::ROLE_GUEST),
-            ),
-            array(
                 'allow',
                 'controllers'   => array('staff/docs', 'staff/news', 'staff/tags', 'staff/coaches'),
                 'roles'         => array(User::ROLE_COORDINATOR_STATE),

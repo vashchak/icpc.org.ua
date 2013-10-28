@@ -1,6 +1,6 @@
 <?php
 
-namespace web\ext;
+namespace common\ext;
 
 abstract class MongoDocument extends \common\ext\MongoDb\Document
 {

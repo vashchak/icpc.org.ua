@@ -7,7 +7,7 @@ namespace common\models\Qa;
  *
  * @property-read Question $question
  */
-class Answer extends \web\ext\MongoDocument
+class Answer extends \common\ext\MongoDocument
 {
 
     /**
@@ -33,7 +33,7 @@ class Answer extends \web\ext\MongoDocument
      * @var array
      */
     public $comments = array();
-    
+
     /**
      * Date created
      * @var int
