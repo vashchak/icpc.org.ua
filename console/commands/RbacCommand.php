@@ -49,11 +49,12 @@ class RbacCommand extends \console\ext\ConsoleCommand
          * Guest role
          */
         $this->_createRole(User::ROLE_GUEST, array(
-            Rbac::OP_ANSWER_READ,
             Rbac::OP_DOCUMENT_READ,
             Rbac::OP_NEWS_READ,
             Rbac::OP_TEAM_READ,
-            Rbac::OP_QUESTION_READ,
+            Rbac::OP_QA_ANSWER_READ,
+            Rbac::OP_QA_COMMENT_READ,
+            Rbac::OP_QA_QUESTION_READ,
         ));
 
         /**
@@ -68,8 +69,10 @@ class RbacCommand extends \console\ext\ConsoleCommand
          */
         $this->_createRole(User::ROLE_STUDENT, array(
             User::ROLE_USER,
-            Rbac::OP_QUESTION_CREATE,
-            Rbac::OP_QUESTION_UPDATE,
+            Rbac::OP_QA_COMMENT_CREATE,
+            Rbac::OP_QA_COMMENT_UPDATE,
+            Rbac::OP_QA_QUESTION_CREATE,
+            Rbac::OP_QA_QUESTION_UPDATE,
         ));
 
         /**
@@ -86,8 +89,6 @@ class RbacCommand extends \console\ext\ConsoleCommand
          */
         $this->_createRole(User::ROLE_COORDINATOR_STATE, array(
             User::ROLE_USER,
-            Rbac::OP_ANSWER_CREATE,
-            Rbac::OP_ANSWER_UPDATE,
             Rbac::OP_COACH_SET_STATUS,
             Rbac::OP_COORDINATOR_SET_STATUS,
             Rbac::OP_DOCUMENT_CREATE,
@@ -96,6 +97,8 @@ class RbacCommand extends \console\ext\ConsoleCommand
             Rbac::OP_NEWS_CREATE,
             Rbac::OP_NEWS_UPDATE,
             Rbac::OP_RESULT_CREATE,
+            Rbac::OP_QA_ANSWER_CREATE,
+            Rbac::OP_QA_ANSWER_UPDATE,
         ));
 
         /**
@@ -110,8 +113,9 @@ class RbacCommand extends \console\ext\ConsoleCommand
          */
         $this->_createRole(User::ROLE_COORDINATOR_UKRAINE, array(
             User::ROLE_COORDINATOR_REGION,
-            Rbac::OP_ANSWER_DELETE,
-            Rbac::OP_QUESTION_DELETE,
+            Rbac::OP_QA_ANSWER_DELETE,
+            Rbac::OP_QA_COMMENT_DELETE,
+            Rbac::OP_QA_QUESTION_DELETE,
         ));
 
         /**
@@ -224,14 +228,18 @@ class RbacCommand extends \console\ext\ConsoleCommand
      */
     protected function _operationsQa()
     {
-        $this->auth->createOperation(Rbac::OP_ANSWER_CREATE, 'Create answer');
-        $this->auth->createOperation(Rbac::OP_ANSWER_READ, 'Read answer');
-        $this->auth->createOperation(Rbac::OP_ANSWER_UPDATE, 'Update answer');
-        $this->auth->createOperation(Rbac::OP_ANSWER_DELETE, 'Delete answer');
-        $this->auth->createOperation(Rbac::OP_QUESTION_CREATE, 'Create question');
-        $this->auth->createOperation(Rbac::OP_QUESTION_READ, 'Read question');
-        $this->auth->createOperation(Rbac::OP_QUESTION_UPDATE, 'Update question');
-        $this->auth->createOperation(Rbac::OP_QUESTION_DELETE, 'Delete question');
+        $this->auth->createOperation(Rbac::OP_QA_ANSWER_CREATE, 'Create answer');
+        $this->auth->createOperation(Rbac::OP_QA_ANSWER_READ, 'Read answer');
+        $this->auth->createOperation(Rbac::OP_QA_ANSWER_UPDATE, 'Update answer');
+        $this->auth->createOperation(Rbac::OP_QA_ANSWER_DELETE, 'Delete answer');
+        $this->auth->createOperation(Rbac::OP_QA_COMMENT_CREATE, 'Create comment');
+        $this->auth->createOperation(Rbac::OP_QA_COMMENT_READ, 'Read comment');
+        $this->auth->createOperation(Rbac::OP_QA_COMMENT_UPDATE, 'Update comment');
+        $this->auth->createOperation(Rbac::OP_QA_COMMENT_DELETE, 'Delete comment');
+        $this->auth->createOperation(Rbac::OP_QA_QUESTION_CREATE, 'Create question');
+        $this->auth->createOperation(Rbac::OP_QA_QUESTION_READ, 'Read question');
+        $this->auth->createOperation(Rbac::OP_QA_QUESTION_UPDATE, 'Update question');
+        $this->auth->createOperation(Rbac::OP_QA_QUESTION_DELETE, 'Delete question');
     }
 
     /**

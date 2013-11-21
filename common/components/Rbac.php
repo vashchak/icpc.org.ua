@@ -15,10 +15,6 @@ class Rbac extends \CApplicationComponent
     /**
      * List of available operations
      */
-    const OP_ANSWER_CREATE          = 'answerCreate';
-    const OP_ANSWER_READ            = 'answerRead';
-    const OP_ANSWER_UPDATE          = 'answerUpdate';
-    const OP_ANSWER_DELETE          = 'answerDelete';
     const OP_COACH_SET_STATUS       = 'coachSetStatus';
     const OP_COORDINATOR_SET_STATUS = 'coordinatorSetStatus';
     const OP_DOCUMENT_CREATE        = 'documentCreate';
@@ -32,10 +28,18 @@ class Rbac extends \CApplicationComponent
     const OP_TEAM_CREATE            = 'teamCreate';
     const OP_TEAM_READ              = 'teamRead';
     const OP_TEAM_UPDATE            = 'teamUpdate';
-    const OP_QUESTION_CREATE        = 'questionCreate';
-    const OP_QUESTION_READ          = 'questionRead';
-    const OP_QUESTION_UPDATE        = 'questionUpdate';
-    const OP_QUESTION_DELETE        = 'questionDelete';
+    const OP_QA_ANSWER_CREATE       = 'qaAnswerCreate';
+    const OP_QA_ANSWER_READ         = 'qaAnswerRead';
+    const OP_QA_ANSWER_UPDATE       = 'qaAnswerUpdate';
+    const OP_QA_ANSWER_DELETE       = 'qaAnswerDelete';
+    const OP_QA_COMMENT_CREATE      = 'qaCommentCreate';
+    const OP_QA_COMMENT_READ        = 'qaCommentRead';
+    const OP_QA_COMMENT_UPDATE      = 'qaCommentUpdate';
+    const OP_QA_COMMENT_DELETE      = 'qaCommentDelete';
+    const OP_QA_QUESTION_CREATE     = 'qaQuestionCreate';
+    const OP_QA_QUESTION_READ       = 'qaQuestionRead';
+    const OP_QA_QUESTION_UPDATE     = 'qaQuestionUpdate';
+    const OP_QA_QUESTION_DELETE     = 'qaQuestionDelete';
 
     /**
      * Current user

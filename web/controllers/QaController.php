@@ -2,6 +2,7 @@
 
 namespace web\controllers;
 
+use Rbac;
 use \common\models\Qa;
 
 class QaController extends \web\ext\Controller
@@ -26,26 +27,26 @@ class QaController extends \web\ext\Controller
             array(
                 'allow',
                 'actions' => array('create'),
-                'roles' => array('qaQuestionCreate'),
+                'roles' => array(Rbac::OP_QA_QUESTION_CREATE),
             ),
             array(
                 'allow',
                 'actions' => array('addComment'),
-                'roles' => array('qaAddComment'),
+                'roles' => array(Rbac::OP_QA_COMMENT_CREATE),
             ),
             array(
                 'allow',
                 'actions' => array('update'),
-                'roles' => array('qaQuestionUpdateOwn'),
+                'roles' => array(Rbac::OP_QA_QUESTION_UPDATE),
             ),
             array(
                 'allow',
                 'actions' => array('saveAnswer'),
-                'roles' => array('qaAnswerCreate'),
+                'roles' => array(Rbac::OP_QA_ANSWER_CREATE),
             ),
             array(
                 'allow',
-                'actions' => array('latest', 'view', 'tag', 'addComment'),
+                'actions' => array('latest', 'view', 'tag'),
                 'users' => array('*'),
             ),
             array(
