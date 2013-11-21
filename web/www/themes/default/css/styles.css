@@ -109,3 +109,13 @@ transform: rotate(-90deg);
 .news .news-title {
     margin-bottom: 0;
 }
+
+/* Qa & Comments
+------------------------------------------------------------------------------ */
+.tag {cursor: pointer;}
+.tag:hover {text-decoration: none;}
+td.tagCell {width: 230px;}
+.comment {border-bottom: dotted; border-width: 1px;}
+.row {margin-right: 0px; margin-left: 0px}
+.comment-add-btn, .comment-subcontainer {margin-top:5px;}
+.comment-content {width: 640px; height: 80px;}

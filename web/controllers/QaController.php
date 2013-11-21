@@ -2,7 +2,7 @@
 
 namespace web\controllers;
 
-use Rbac;
+use \common\components\Rbac;
 use \common\models\Qa;
 
 class QaController extends \web\ext\Controller

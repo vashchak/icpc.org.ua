@@ -175,8 +175,6 @@ class RbacCommand extends \console\ext\ConsoleCommand
 
     /**
      * Document operations
-     *
-     * @return void
      */
     protected function _operationsDocument()
     {
@@ -188,8 +186,6 @@ class RbacCommand extends \console\ext\ConsoleCommand
 
     /**
      * News operations
-     *
-     * @return void
      */
     protected function _operationsNews()
     {
@@ -279,5 +275,5 @@ class RbacCommand extends \console\ext\ConsoleCommand
             echo "Password: $password\n";
         }
     }
-
+    
 }
