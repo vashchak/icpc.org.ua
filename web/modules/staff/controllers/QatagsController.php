@@ -89,7 +89,8 @@ class QatagsController extends \web\modules\staff\ext\Controller
     /**
      * Delete tag
      */
-    public function actionDelete() {
+    public function actionDelete()
+    {
         if ($this->request->isPostRequest) {
             $id = $this->request->getPost('id');
 
